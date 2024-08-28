@@ -31,13 +31,13 @@ def get_page_title(url):
 def create_Excel(file):
     df_urls = pd.read_excel(file)
 
-    page_names, page_urls = [], []
+    page_name, page_url = [], []
 
     for url in df_urls['URL']:
-        page_names.append(get_page_title(url))
-        page_urls.append(url)
+        page_name.append(get_page_title(url))
+        page_url.append(url)
 
-    df_result = pd.DataFrame({'Page Name': page_names, 'Page URL': page_urls})
+    df_result = pd.DataFrame({'Page Name': page_name, 'Page URL': page_url})
     df_result.to_excel(file, index=False)
 
 
