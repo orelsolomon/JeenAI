@@ -46,6 +46,7 @@ def export_to_excel(urls, file):
     df.to_excel(file, index=False)
 
 
+# Main
 ynet_url = 'https://www.ynet.co.il/home/0,7340,L-8,00.html'
 ynet_links = get_ynet_links(ynet_url)
 file = 'data.xlsx'
