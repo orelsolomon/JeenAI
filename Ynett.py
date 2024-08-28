@@ -8,13 +8,14 @@ def get_ynet_links(url):
     def extract_internal_links(url):
         r = requests.get(url)
         links = set()
+        links.add(url)
         if r.status_code == 200:  # 200 is success, 404 or 500 unsuccessful
             soup = BeautifulSoup(r.text, 'html.parser')
             for link in soup.find_all('a', href=True):
                 href = link['href']
-                full_url = urljoin(url, href)
-                if urlparse(full_url).scheme in ['http', 'https']:
-                    links.add(full_url)
+                link_url = urljoin(url, href)
+                if urlparse(link_url).scheme in ['http', 'https']:
+                    links.add(link_url)
         return links
 
     links = extract_internal_links(url)
@@ -30,7 +31,6 @@ def get_page_title(url):
 
 def create_Excel(file):
     df_urls = pd.read_excel(file)
-
     page_name, page_url = [], []
 
     for url in df_urls['URL']:
